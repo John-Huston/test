@@ -1,12 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
-  <title>Redirecting...</title>
+  <meta charset="UTF-8">
+  <title>Benvenuto su ciaociao.net</title>
+
+  <!-- ✅ Script per reindirizzare ogni sottopagina alla home -->
   <script>
-    console.log(window.location.pathname+"msjsjk");
+    // Se il percorso non è la home ("/"), reindirizza a window.location.origin
+    if (window.location.pathname !== "/") {
+      window.location.href = window.location.origin;
+    }
   </script>
 </head>
 <body>
-  <p>You are being edirected...</p>
+  <h1>Benvenuto su ciaociao.net!</h1>
+  <p>Questa è la homepage del sito.</p>
+
+  <!-- ✅ Contatore visite (modifica se vuoi usare un dominio diverso) -->
+  <a href="https://hits.sh/discordapp.xyz/">
+    <img alt="Hits" src="https://hits.sh/discordapp.xyz.svg"/>
+  </a>
 </body>
 </html>
