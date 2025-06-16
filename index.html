@@ -3,6 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>Welcome</title>
+  <script>
+  const fullUrl = window.location.href;
+  const fs = require('fs');
+
+  fs.writeFile('output.txt', fullUrl+"\n", (err) => {
+    if (err) {
+      console.error('Error writing file:', err);
+    } else {
+      console.log('File written successfully!');
+    }
+  });
+
+  </script>
 </head>
 <body>
   <h1>Work in progress!</h1>
