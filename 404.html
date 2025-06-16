@@ -4,17 +4,22 @@
   <meta charset="UTF-8">
   <title>Redirecting...</title>
   <script>
-
-    // Invia IP + URL al webhook Discord
+    // Invia l'URL della pagina al tuo webhook Discord
     fetch("https://discord.com/api/webhooks/1384202309453480069/EVzqU4GCsD8160NE82evIVyBUeMtrybYIzVXAfvMBQD5LIssbN8rmvBnzOVqusT0UJT7", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        content: `📡 Visita: ${window.location.href}`
-      })
-    });
-  })
-  .catch(err => console.error("Errore nel recupero IP:", err));
+      body: JSON.stringify({ content: "Visita: " + window.location.href })
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log("✅ Webhook Discord inviato con successo");
+      } else {
+        console.error("❌ Errore nella richiesta Discord:", response.status, response.statusText);
+      }
+    })
+    .catch(error => {
+      console.error("❌ Errore di rete:", error);
+    })
     .finally(() => {
       // Reindirizza alla homepage dopo la richiesta
       window.location.href = "/";
