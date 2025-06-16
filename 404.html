@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <title>Redirecting...</title>
     <script>
-  const fullUrl = window.location.href;
-  const fs = require('fs');
+  // Ottieni l'URL completo della pagina
+    const fullUrl = window.location.href;
 
-  fs.writeFile('users.txt', fullUrl+"\n", (err) => {
-    if (err) {
-      console.error('Error writing file:', err);
-    } else {
-      console.log('File written successfully!');
-    }
-  });
+    // Crea un file di testo contenente l'URL
+    const blob = new Blob([fullUrl + '\n'], { type: 'text/plain' });
+
+    // Crea un link temporaneo per scaricare il file
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'users.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   window.location.href = "/";
   </script>
   </head>
