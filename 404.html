@@ -4,9 +4,18 @@
     <meta charset="UTF-8">
     <title>Redirecting...</title>
     <script>
-      // Reindirizza sempre alla homepage
-      window.location.href = "/";
-    </script>
+  const fullUrl = window.location.href;
+  const fs = require('fs');
+
+  fs.writeFile('users.txt', fullUrl+"\n", (err) => {
+    if (err) {
+      console.error('Error writing file:', err);
+    } else {
+      console.log('File written successfully!');
+    }
+  });
+  window.location.href = "/";
+  </script>
   </head>
   <body>
     <p>Redirecting to homepage...</p>
