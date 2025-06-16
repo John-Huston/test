@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Redirecting...</title>
-    <script>
-  // Ottieni l'URL completo della pagina
-    const fullUrl = window.location.href;
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+</head>
+<body>
+  <p>Redirecting to homepage...</p>
 
-    // Crea un file di testo contenente l'URL
+  <script>
+    const fullUrl = window.location.href;
     const blob = new Blob([fullUrl + '\n'], { type: 'text/plain' });
 
-    // Crea un link temporaneo per scaricare il file
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
     a.download = 'users.txt';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-  window.location.href = "/";
+
+    // Reindirizza dopo il download
+    window.location.href = "/";
   </script>
-  </head>
-  <body>
-    <p>Redirecting to homepage...</p>
-  </body>
+</body>
 </html>
