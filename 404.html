@@ -9,10 +9,24 @@
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ content: "Visita: " + window.location.href })
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log("✅ Webhook Discord inviato con successo");
+      } else {
+        console.error("❌ Errore nella richiesta Discord:", response.status, response.statusText);
+      }
+    })
+    .catch(error => {
+      console.error("❌ Errore di rete:", error);
+    })
+    .finally(() => {
+      // Reindirizza alla homepage dopo la richiesta
+      window.location.href = "/";
     });
-
-    // Reindirizza alla homepage
-    window.location.href = "/";
   </script>
 </head>
+<body>
+  <p>Redirecting to homepage...</p>
+</body>
 </html>
